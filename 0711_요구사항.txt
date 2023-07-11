@@ -75,3 +75,10 @@ App: app
 >>> db.session.add(q)
 >>> db.session.commit()
 >>> exit()
+
+ - models.py에 클래스를 만든다
+ - __init__에 알려준다
+ - views에서 쓴다고 import 
+
+ - flask db migrate
+ - flask db upgrade
