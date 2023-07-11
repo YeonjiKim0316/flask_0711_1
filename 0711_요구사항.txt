@@ -63,3 +63,15 @@ app.py로 시작하는 flask 프레임워크를 한 장의 파일을 만들 겁�
 
  - flask: HTML, JS, CSS 코드 사이에 파이썬 코드를 삽입해서 데이터를 가져오는 Jinja 라는 템플릿을 사용합니다. 
  - jinja 템플릿이 shell 커맨드를 기반으로 한 ORM을 사용합니다.
+
+ (myvenv) C:\ITStudy\06_flask\woorifisa\woorifisa>flask shell 
+Python 3.10.9 | packaged by Anaconda, Inc. | (main, Mar  1 2023, 18:18:15) [MSC v.1916 64 bit (AMD64)] on win32
+App: app
+
+>>> from app.models import Question 
+>>> from datetime import datetime
+>>> q = Question(subject="첫 질문입니다", content="내용이 무엇인가요", create_date=datetime.now())
+>>> from app import db
+>>> db.session.add(q)
+>>> db.session.commit()
+>>> exit()
