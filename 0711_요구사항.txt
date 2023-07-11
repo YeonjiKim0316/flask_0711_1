@@ -82,3 +82,80 @@ App: app
 
  - flask db migrate
  - flask db upgrade
+
+ >>> from app.models import Question, Answer
+>>> from datetime import datetime
+>>> from app import db
+>>> a = Answer(content="첫 질문에 대한 대답입니다", create_date=datetime.now(), question_id=1)
+>>> a
+<Answer (transient 2318883932864)>db
+>>> db.session.add(a)
+>>> a2 = Answer(content="첫 질문에 대한 두번째 대답입니다", create_date=datetime.now(), question_id=1)
+>>> db.session.add(a2) 
+>>> db.session.commit()   
+
+
+>>> from app.models import Question, Answer
+>>> from datetime import datetime
+>>> from app import db
+>>> a = Answer(content="첫 질문에 대한 대답입니다", create_date=datetime.now(), question_id=1)
+>>> a
+<Answer (transient 2318883932864)>
+>>> db.session.add(a)
+>>> a2 = Answer(content="첫 질문에 대한 두번째 대답입니다", create_date=datetime.now(), question_id=1)
+>>> db.session.add(a2)
+>>> db.session.commit()
+>>> Question.query.all()
+[<Question 1>, <Question 2>]
+>>> Question.query.filter() 
+<flask_sqlalchemy.query.Query object at 0x0000021BE840F400>
+>>> Question.query.filter(Question.id==2) 
+<flask_sqlalchemy.query.Query object at 0x0000021BE840E800>
+>>> Question.query.filter(Question.id==2).all()
+[<Question 2>]
+>>> select * from question where id=2; 
+  File "<console>", line 1
+    select * from question where id=2;
+             ^^^^
+SyntaxError: invalid syntax
+>>> Question.query.get(2)                       
+<Question 2>
+>>> Question.query.filter(Question.subject.like('%글%').all() 
+... ]
+  File "<console>", line 2
+    ]
+    ^
+SyntaxError: closing parenthesis ']' does not match opening parenthesis '(' on line 1>>> Question.query.filter(Question.subject.like('%글%')).all() 
+[<Question 2>]
+>>> Question.query.filter(Question.content.like('%내용%')).all() 
+[<Question 1>, <Question 2>]
+>>> Question.query.filter(Question.subject.like('%글')).all()    
+[]
+>>> Question.query.filter(Question.subject.like('글')).all()  
+[]
+>>> q = Question.query.get(2)                                    
+>>> q
+<Question 2>
+>>> q.subject
+'두번째 글입입니다'
+>>> q.content
+'내용이 무엇인가요'
+>>> q.subject = '두번째 글입니다 2'
+>>> q.subject 
+'두번째 글입니다 2'
+>>> db.session.commit()
+
+
+# 삭제
+>>> q = Question(subject="첫 질문입니다", content="내용이 무엇인가요", create_date=datetime.now())
+>>> db.session.add(q)
+>>> db.session.commit()
+>>> Question.query.all()
+[<Question 1>, <Question 2>, <Question 3>]
+>>> q = Question.query.get(3)
+>>> q
+<Question 3>
+>>> q.subject
+'첫 질문입니다'
+>>> db.session.delete(q)
+>>> db.commit()

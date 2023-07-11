@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    question 이라는 객체에 값이 있다면
+    {% if question %}
+    글번호: {{ question.id }}
+    글제목: {{ question.subject }}
+    글내용: {{ question.content }}
+    글작성일: {{ question.create_date }}
+    {% endif %}
+
+    endif 바깥의 문장입니다.
+</body>
+</html>

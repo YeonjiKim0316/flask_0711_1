@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 질문 목록 -->
+
+{#  render_template 함수에서 전달받은 질문 목록 데이터 question_list가 있는지 검사 #}
+{% if question_list %}  question_list =[<Question 1>, <Question 2>]
+    <ul>
+    {#  question_list에 저장된 데이터를 하나씩 꺼내 question 객체에 대입한다. 파이썬의 for~in 문을 떠올리면 쉽게 이해할 수 있을 것이다. #}
+    {% for question in question_list %} 
+        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+{% endif %}
+
+    글번호
+    제목
+    내용
+    작성일자
+</body>
+</html>
