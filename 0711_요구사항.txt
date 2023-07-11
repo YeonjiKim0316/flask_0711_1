@@ -8,16 +8,15 @@
     - pip install flask 
 
 # 1. woorifisa 폴더에 
-app.py로 시작하는 flask 프레임워크를 하나 만들겁니다. - 1_app.py 참고
+app.py로 시작하는 flask 프레임워크를 한 장의 파일을 만들 겁니다. 
+- 1_app.py 참고
 
 /about_me
-
-저는 **name 입니다** 
+  - 저는 __name__ 입니다
 
 /hello :안녕하세요
 /bye : 잘 가세요 
 
-- 한장의 파일로 작성해 보시고
 
 
 # 2. 어플리케이션 팩토리 방식 이용 -> 2_app 폴더의 __init__.py 참조
@@ -29,3 +28,9 @@ app.py로 시작하는 flask 프레임워크를 하나 만들겁니다. - 1_app.
     - fisa/about_me
     - fisa/hello
     - fisa/bye
+
+# 4. view를 위한 Blueprint 하나 더 추가
+- 본인이름/
+    - 본인이름/about_me
+    - 본인이름/hello
+    - 본인이름/bye
