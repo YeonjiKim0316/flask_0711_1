@@ -1,5 +1,6 @@
 from flask import Blueprint
-            
+from app.models import Question
+
                  # 우리가 부를 이름, flask 프레임워크가 찾을 이름, 라우팅주소
 fisa = Blueprint('basic', __name__, url_prefix='/fisa')
 
