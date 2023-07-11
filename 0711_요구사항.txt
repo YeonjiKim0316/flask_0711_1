@@ -159,3 +159,6 @@ SyntaxError: closing parenthesis ']' does not match opening parenthesis '(' on l
 '첫 질문입니다'
 >>> db.session.delete(q)
 >>> db.commit()
+
+
+# post_list.html에 값을 전달하는 post를 완성해주세요.

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
 <body>
     <!-- 질문 목록 -->
@@ -13,7 +14,7 @@
     <ul>
     {#  question_list에 저장된 데이터를 하나씩 꺼내 question 객체에 대입한다. 파이썬의 for~in 문을 떠올리면 쉽게 이해할 수 있을 것이다. #}
     {% for question in question_list %} 
-        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
+        <li><a href="/fisa/detail/{{ question.id }}/">{{ question.subject }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -24,5 +25,6 @@
     제목
     내용
     작성일자
+    
 </body>
 </html>

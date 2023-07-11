@@ -10,8 +10,9 @@ def detail(question_id):
     return render_template('question/question_detail.html', question=question)
 
 @fisa.route('/post')
-# def post_list():
-#     return 'question\qustion_list.html' 
+def post_list():
+    question_list = Question.query.all()
+    return render_template('question/question_list.html', question_list=question_list) 
 
 
 @fisa.route('/about_me')
