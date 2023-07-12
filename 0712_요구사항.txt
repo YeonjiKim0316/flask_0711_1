@@ -28,3 +28,10 @@
 #     <p>순서: {{ loop.index }} </p>
 #     <p>{{ item }}</p>
 # {% endfor %}
+
+
+# 답변에 관한 기능 작성
+    1) Model - models.py, forms.py 
+    2) View - views/answer_views.py
+            - /answer 로 시작하는 경로로 제어합니다.
+    3) Template - question_detail.html 아래에 작성
