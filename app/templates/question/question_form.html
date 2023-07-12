@@ -7,7 +7,7 @@
     <form class="my-3" action="{{ url_for('question.create') }}">
     <!-- <form method="post" class="my-3" action="{{ url_for('question.create') }}"> -->
 
-    {{ form.csrf_token }}
+       {{ form.csrf_token }}
 		<!-- 오류표시 Start -->
         {% if form.errors %}
                 <div class="alert alert-danger" role="alert">
@@ -23,15 +23,15 @@
         {% endif %}
         <!-- 오류표시 End -->
 
-		{# Form에서 작성한 라벨 #}
+        {# Form에서 작성한 라벨 #}
         {{ form.subject.label }}
 
 		{# Form에서 작성한 필드. 값을 입력 받아야 하는 '폼'이므로 호출연산자로 작성 #}
-        {{ form.subject() }}
-            <p>
+        {{ form.subject(class="form-control") }}
+        <p>
         {{ form.content.label }}
-        {{ form.content() }}
-
+        {{ form.content(class="form-control") }}
+        <p>   
         <button type="submit" class="btn btn-dark">저장</button>
     </form>
 </div>
