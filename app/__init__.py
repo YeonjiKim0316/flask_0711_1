@@ -14,8 +14,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from .views import basic_views, yeonji_views
+    from .views import basic_views
     app.register_blueprint(basic_views.fisa)
-    app.register_blueprint(yeonji_views.yeonji)
     
     return app

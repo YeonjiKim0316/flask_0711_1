@@ -15,7 +15,7 @@
 
 # 에러가 나는 경우: git 임시저장소에 이전 내용이 등록되어 있어서 
 # 임시저장소의 캐시를 삭제하면 됩니다
-# git rm -r --cached
+# git rm -r --cached .
 
 # 가상환경
 myvenv/
