@@ -1,1 +1,6 @@
-글 작성 완료
+<form method="POST" action="/">
+    {{ form.csrf_token }} {# CSRF 공격을 막기 위해 서버와 토큰을 확인 #}
+    {{ form.subject.label }} {{ form.subject(size=20) }}
+    {{ form.content.label }} {{ form.content(size=14) }}
+    <input type="submit" value="Go">
+</form>
