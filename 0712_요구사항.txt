@@ -1,0 +1,12 @@
+# 0. 정리
+    - 파일 단위 정리
+    - 사용하지 않는 코드 정리 
+    - .gitignore
+        -  _pycache_ 디렉토리 등 
+        - migrations 폴더 안에 있는 계속 바뀌는 테이블 변경사항들
+        - 가상환경 폴더 
+            # 현재 내가 사용중인 파이썬 (가상)환경에 등록된 라이브러리의 이름, 버전을 기록
+            $ pip freeze > requirements.txt
+
+            # requirements.txt에 있는 패키지를 내 파이썬 (가상)환경에 설치
+            $ pip install -r requirements.txt 
