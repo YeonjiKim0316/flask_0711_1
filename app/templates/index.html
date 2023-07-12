@@ -20,7 +20,9 @@
             <section class="py-5 bg-light about_me" id="scroll-target">
                 <div class="container px-5 my-5"  id="two">
                     <div class="row gx-5 align-items-center">
-                        <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="data/spongebob.jpg" alt="..." /></div>
+                        <!-- <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="data/spongebob.jpg" alt="..." /></div> -->
+                        <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="{{ url_for('static', filename='data/spongebob.jpg') }}" alt="..." /></div>
+                        
                         <div class="col-lg-6">
                             <h2 class="fw-bolder">Programmer</h2>
                             <p class="lead fw-normal text-muted mb-0">1000번 안 되다가 1번 될 때 느끼는 희열감과<br>
@@ -33,7 +35,7 @@
             <section class="py-5" id="three">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 align-items-center">
-                        <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="data/profile.png" alt="..." /></div>
+                        <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="{{ url_for('static', filename='data/profile.png') }}" alt="..." /></div>
                         <div class="col-lg-6">
                             <h2 class="fw-bolder">Technical Editor</h2>
                             <p class="lead fw-normal text-muted mb-0">국어국문학을 전공한 개발자의 눈으로<br> 잘 이해되는 설명과 잘 돌아가는 코드를 가진<br> 책을 세상에 선보이는 지식노동자</p>
