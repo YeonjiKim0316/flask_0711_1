@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from app.models import Question, Answer
 # 우리가 부를 이름, flask 프레임워크가 찾을 이름, 라우팅주소
 fisa = Blueprint('basic', __name__, url_prefix='/')
@@ -25,3 +25,10 @@ def loop():
 @fisa.route('/')
 def index():
     return render_template('index.html')
+
+@fisa.route('/submit', methods=['GET', 'POST'])
+def submit():
+    form = MyForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('submit.html', form=form)
