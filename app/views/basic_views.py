@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect
 from app.models import Question, Answer
 from datetime import datetime
 from app import db
-from app.forms import QuestionForm
+from app.forms import QuestionForm, AnswerForm
 
 
 # 우리가 부를 이름, flask 프레임워크가 찾을 이름, 라우팅주소
@@ -11,8 +11,10 @@ fisa = Blueprint('question', __name__, url_prefix='/')
 @fisa.route('/detail/<int:question_id>/')
 def detail(question_id):
     # question = Question.query.get(question_id)
+    # AnswerForm을 추가합니다
+    form = AnswerForm()
     question = Question.query.get_or_404(question_id)
-    return render_template('question/question_detail.html', question=question)
+    return render_template('question/question_detail.html', question=question, form=form)
 
 @fisa.route('/list')
 def post_list():
