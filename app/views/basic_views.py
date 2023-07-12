@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, redirect
 from app.models import Question, Answer
+from datetime import datetime
+from app import db
 from app.forms import QuestionForm
 
+
 # 우리가 부를 이름, flask 프레임워크가 찾을 이름, 라우팅주소
-fisa = Blueprint('basic', __name__, url_prefix='/')
+fisa = Blueprint('question', __name__, url_prefix='/')
 
 @fisa.route('/detail/<int:question_id>/')
 def detail(question_id):
@@ -28,9 +31,24 @@ def loop():
 def index():
     return render_template('index.html')
 
-@fisa.route('/submit', methods=['GET', 'POST'])
-def submit():
+@fisa.route('/create', methods=['GET', 'POST'])
+def create():
+    # 입력양식에 데이터를 입력 받는다
     form = QuestionForm()
+    # 로그인 한 경우, 로그인 하지 않은 경우
+    # 데이터가 요구조건에 맞춰서 모두 잘 들어와있는지 
     if form.validate_on_submit():
+        q = Question(subject=form.subject.data, content=form.content.data,     
+                     create_date=datetime.now())
+        db.session.add(q)
+        db.session.commit()
         return redirect('/success')
-    return render_template('submit.html', form=form)
+    return render_template('question/question_form.html', form=form)
+
+@fisa.route('/success')
+def success():
+    question_list = Question.query.all()
+    return render_template('question/question_list.html', question_list=question_list) 
+
+
+

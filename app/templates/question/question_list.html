@@ -3,20 +3,34 @@
 {% block content %}
     <!-- 질문 목록 -->
 {#  render_template 함수에서 전달받은 질문 목록 데이터 question_list가 있는지 검사 #}
-{% if question_list %}  question_list =[<Question 1>, <Question 2>]
-    <ul>
-    {#  question_list에 저장된 데이터를 하나씩 꺼내 question 객체에 대입한다. 파이썬의 for~in 문을 떠올리면 쉽게 이해할 수 있을 것이다. #}
-    {% for question in question_list %} 
-        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>질문이 없습니다.</p>
-{% endif %}
 
-    글번호
-    제목
-    내용
-    작성일자
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if question_list %}
+        {% for question in question_list %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
+            </td>
+            <td>{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
