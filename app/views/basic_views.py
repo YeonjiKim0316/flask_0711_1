@@ -14,3 +14,11 @@ def post_list():
     question_list = Question.query.all()
     return render_template('question/question_list.html', question_list=question_list) 
 
+
+# /loop 라는 uri로 이동하는 화면을 만듭니다. 
+# test.html 파일로 가게 됩니다. test = [ 1, 2, 3, 4, 5] 라는 리스트를 같이 return 합니다. 
+@fisa.route('/loop')
+def loop():
+    test = [ 1, 2, 3, 4, 5]
+    return render_template('test.html', list=test)
+
