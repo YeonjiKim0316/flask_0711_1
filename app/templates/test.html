@@ -8,13 +8,16 @@
 <body>
     <p>endfor가 시작하는 지점 </p>
     {% for item in list %}
-        <p>순서: {{ loop.index + 5 }} </p>
+        <p>순서: {{ loop.index }} </p>
         <p>{{ item }}</p>
         <p> endfor가 진행중임 </p>
         <hr>
 
-        # loop 인덱스가 끝나면
-        # 종료 라는 메시지를 출력하는 조건문 하나 만들어볼게요
+        {% if loop.last %}
+            종료
+        {% endif %}
+
+        {# 종료 라는 메시지를 출력하는 조건문 하나 만들어볼게요 #}
     {% endfor %}
 
     <p>endfor가 끝나는 지점 </p>

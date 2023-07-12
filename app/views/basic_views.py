@@ -22,3 +22,6 @@ def loop():
     test = [ 1, 2, 3, 4, 5]
     return render_template('test.html', list=test)
 
+@fisa.route('/')
+def index():
+    return render_template('index.html')
