@@ -27,12 +27,6 @@ def _list():
     return render_template('question/question_list.html', question_list=question_list)
 
 
-# view에서 주소창에 쓸 uri를 만들때는 /1/ /2/ /3/ 
-@question.route('/list1/')
-def post_list():
-    question_list = Question.query.all()
-    return render_template('question/question_list.html', question_list=question_list) 
-
 @question.route('/create', methods=['GET', 'POST'])
 def create():
     # 입력양식에 데이터를 입력 받는다
