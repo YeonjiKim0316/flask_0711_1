@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, request
 from app.models import Question, Answer
 from datetime import datetime
 from app import db
@@ -16,8 +16,19 @@ def detail(question_id):
     question = Question.query.get_or_404(question_id)
     return render_template('question/question_detail.html', question=question, form=form)
 
-# view에서 주소창에 쓸 uri를 만들때는 /1/ /2/ /3/ 
+# pagenation으로 글 목록 출력하기
 @question.route('/list/')
+def _list():
+    page = request.args.get('page', type=int, default=1)  # 페이지
+     # 시간순으로 최신글을 맨 위로 올릴 것인지
+    question_list = Question.query.order_by(Question.create_date.desc())
+    # 10개씩 끊어서 출력 
+    question_list = question_list.paginate(page=page, per_page=10)
+    return render_template('question/question_list.html', question_list=question_list)
+
+
+# view에서 주소창에 쓸 uri를 만들때는 /1/ /2/ /3/ 
+@question.route('/list1/')
 def post_list():
     question_list = Question.query.all()
     return render_template('question/question_list.html', question_list=question_list) 
