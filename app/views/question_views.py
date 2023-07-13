@@ -10,13 +10,14 @@ question = Blueprint('question', __name__, url_prefix='/question')
 
 @question.route('/detail/<int:question_id>/')
 def detail(question_id):
-    # question = Question.query.get(question_id)
     # AnswerForm을 추가합니다
     form = AnswerForm()
+    # question = Question.query.get(question_id)
     question = Question.query.get_or_404(question_id)
     return render_template('question/question_detail.html', question=question, form=form)
 
-@question.route('/list')
+# view에서 주소창에 쓸 uri를 만들때는 /1 /2 /3 
+@question.route('/list/')
 def post_list():
     question_list = Question.query.all()
     return render_template('question/question_list.html', question_list=question_list) 

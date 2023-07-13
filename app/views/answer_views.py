@@ -13,8 +13,8 @@ def create(question_id):
     form = AnswerForm()
 
     # question 화면 가져오기
-    question = Question.query.get_or_404(question_id)
-    
+    # question = Question.query.get_or_404(question_id)
+    question = Question.query.all(question_id)
     if form.validate_on_submit():
         # 어느 글에서 오는지 (question_id)
         a = Answer(content=form.content.data, create_date=datetime.now())
