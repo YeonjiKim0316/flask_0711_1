@@ -36,8 +36,10 @@
 # 회원가입 기능을 관리하는 MTV 작성
     회원 
 - 가입
-    M - 회원에 관한 Model -> Table
-    T - signup.html
+    M - 회원에 관한 Model -> Table  v
+        - models.py  v
+        - forms.py 에 UserCreateForm 작성
+    T - signup.html 
     V - /signup/
 
 
