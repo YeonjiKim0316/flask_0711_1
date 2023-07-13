@@ -19,3 +19,9 @@ class Answer(db.Model):
             # 2) Answer는 남겨놓는다 
                 # Question의 id를 남겨놓는다
                 # Question의 id를 삭제한다
+
+class User(db.Model):
+    id =db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
