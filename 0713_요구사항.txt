@@ -1,0 +1,8 @@
+# 0713 요구사항 (~10시까지)
+
+- 1) 파일 정리 - 불필요한 파일 삭제 및 .gitignore 에 숨길 파일 목록 재작성 v
+- 2) 질문과 관련된 기능을 question_views.py로 변경하고 관련 MVC 파트도 모두 변경합니다. v
+    - question = Blueprint('question', __name__, url_prefix='/question')
+- 3) 네비게이션 바의 항목을 아래와 같이 변경하세요(원래 있던 Home, Developer, Technical Editor 항목은 삭제합니다)
+    - 가. QnA라는 이름으로 된 question_list.html로 가는 경로 추가(이미 있는 주소를 활용하세요)
+    - 나. 부트스트랩을 활용하여 SignUp, Login 버튼을 만들어주세요.

@@ -3,10 +3,13 @@
         <a class="navbar-brand">YEONJI KIM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#one">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#two">Developer</a></li>
-                <li class="nav-item"><a class="nav-link" href="#three">Technical Editor</a></li>
+            <!-- QnA, Login, SignUP 버튼 생성 -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 grid gap-2 column-gap-3">
+                <!-- QnA 게시판으로 이동 -> 1) 상대경로로 이동(/question/list/) 2) {{ url_for('question.post_list') }} -->
+                <!-- <li class="nav-item"><a class="nav-link" href="/question/list/">QnA</a></li> -->
+                <li class="nav-item"><a class="nav-link" href=" {{ url_for('question.post_list') }} ">QnA</a></li>
+                <li class="nav-item"><a class="btn btn-light" href="#" role="button">Login</a></li>
+                <li class="nav-item"><a class="btn btn-light" href="#" role="button">SignUp</a></li>
             </ul>
 
         </div>
