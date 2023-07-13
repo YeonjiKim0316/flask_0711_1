@@ -20,7 +20,9 @@
         {% if question_list %}
         {% for question in question_list %}
         <tr>
-            <td>{{ loop.index }}</td>
+            <!-- <td>{{ loop.index }}</td> -->
+            <!-- <td>{{ question.id }}</td> -->
+            <td>{{ question_list.total - ((question_list.page-1) * question_list.per_page) - loop.index0 }}</td>
             <td>
                 <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
             </td>
