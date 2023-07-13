@@ -6,3 +6,19 @@
 - 3) 네비게이션 바의 항목을 아래와 같이 변경하세요(원래 있던 Home, Developer, Technical Editor 항목은 삭제합니다)
     - 가. QnA라는 이름으로 된 question_list.html로 가는 경로 추가(이미 있는 주소를 활용하세요)
     - 나. 부트스트랩을 활용하여 SignUp, Login 버튼을 만들어주세요.
+
+
+# answer_views 구현
+- answer_set 이라는 backref를 통해 question을 통해 answer_id를 역참조 할 수 있음
+
+# pagination
+- flask shell에서 임시데이터 100개 생성 후 화면 레이아웃 구성
+
+>>> for i in range(100):
+...     q = Question(subject="제목:[%03d]" % i, content="글내용", create_date=datetime.now())
+...     db.session.add(q)
+...
+...                    
+>>> db.session.commit()
+>>> q = Question.query.all()
+>>> q

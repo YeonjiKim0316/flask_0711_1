@@ -12,6 +12,7 @@ class Answer(db.Model):
     content = db.Column(db.Text(), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'))
+    # question 과 관련된 객체에서 어느 답변들이 question에 딸려오는지를 'answer_set'이라는 필드로 가져올 수 있게 추가한 기능
     question = db.relationship('Question', backref=db.backref('answer_set'))
     # Foreign Key로 걸려있는 테이블에서 삭제가 발생했을 때 
             # 1) Answer도 같이 지운다
