@@ -13,7 +13,8 @@
             {% if g.user %}
             <ul class="navbar-nav">
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ url_for('auth.logout') }}">{{ g.user.username }} (로그아웃)</a>
+                    {{ g.user.username }}
+                    <a class="nav-link"  class="btn btn-light"  href="{{ url_for('auth.logout') }}" ></a>
                 </li>
             </ul>
             {% else %}
@@ -21,11 +22,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <!-- <a class="nav-link" href="#">계정생성</a> -->
-                    <a class="nav-link" href="{{ url_for('auth.signup') }}">SignUp</a> 
+                    <a class="nav-link" class="btn btn-light" href="{{ url_for('auth.signup') }}">SignUp</a> 
                 </li>
                 <li class="nav-item">
                     <!-- <a class="nav-link" href="#">로그인</a> -->
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    <a class="nav-link" class="btn btn-light" href="{{ url_for('auth.login') }}">Login</a>
                 </li>
             </ul>
 
