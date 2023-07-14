@@ -63,8 +63,7 @@
                 {% if g.user == answer.user %}
                 <a href="{{ url_for('answer.modify', answer_id=answer.id) }}"
                 class="btn btn-sm btn-outline-secondary">수정</a>
-                <a href="{{ url_for('answer.delete', answer_id=answer.id) }}" class="delete btn btn-sm btn-outline-secondary"
->삭제</a>
+                <a href="{{ url_for('answer.delete', answer_id=answer.id) }}" class="delete btn btn-sm btn-outline-secondary">삭제</a>
                 {% endif %}
             </div>
         </div>

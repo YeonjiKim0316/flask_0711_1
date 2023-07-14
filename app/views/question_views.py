@@ -42,7 +42,6 @@ def create():
 @question.route('/modify/<int:question_id>', methods=('GET', 'POST'))
 @login_required
 def modify(question_id):
-    # 원본 글을 미리 가져옵니다 
     question = Question.query.get_or_404(question_id)
     if g.user != question.user:
         flash('수정권한이 없습니다')
