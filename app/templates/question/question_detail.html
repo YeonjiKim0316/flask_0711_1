@@ -35,8 +35,7 @@
                 class="btn btn-sm btn-outline-secondary">수정</a>
 
             <!-- 삭제버튼에 자바스크립트 심기 -->
-            <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
-            data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</a>
+            <a href="{{ url_for('question.delete', question_id=question.id) }}" class="delete btn btn-sm btn-outline-secondary">삭제</a>
             {% endif %}
                
                <!-- 수정버튼 변경 완료 - 이후 question_views.py 수정 -->
@@ -64,8 +63,8 @@
                 {% if g.user == answer.user %}
                 <a href="{{ url_for('answer.modify', answer_id=answer.id) }}"
                 class="btn btn-sm btn-outline-secondary">수정</a>
-                <a href="#" class="delete btn btn-sm btn-outline-secondary"
-                data-uri="{{ url_for('answer.delete', answer_id=answer.id) }}">삭제</a>
+                <a href="{{ url_for('answer.delete', answer_id=answer.id) }}" class="delete btn btn-sm btn-outline-secondary"
+                >삭제</a>
                 {% endif %}
             </div>
         </div>
