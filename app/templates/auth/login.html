@@ -1,4 +1,22 @@
-{% %}
-base.html을 상속받습니다
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">로그인</h5>
+    <form method="post"> <!-- action 속성이 지정되어 있지 않으면 다음 경로에 대한 지시가 없으므로 현재 주소를 post로 한번 더 호출하게 됨 -->
+        {{ form.csrf_token }}
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="username">사용자 이름</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.data or '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password"
+                   value="{{ form.password.data or '' }}">
+        </div>
 
-UserLoginForm의 값을 입력 받습니다.
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div>
+{% endblock %}
