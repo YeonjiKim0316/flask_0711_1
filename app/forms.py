@@ -15,3 +15,8 @@ class UserCreateForm(FlaskForm):
     password1 = StringField("비밀번호", validators=[DataRequired(), EqualTo('password2', "비밀번호가 틀립니다")])
     password2 = StringField("비밀번호 다시 입력", validators=[DataRequired()])
     email = StringField("이메일", validators=[DataRequired()])
+
+
+class UserLoginForm(FlaskForm):
+    username = StringField("사용자ID", validators=[DataRequired(), Length(5, 15, "ID는 5글자 이상 15글자 이내여야 합니다.")])
+    password = StringField("비밀번호", validators=[DataRequired()])
