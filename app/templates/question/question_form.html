@@ -9,18 +9,7 @@
 
        {{ form.csrf_token }}
 		<!-- 오류표시 Start -->
-        {% if form.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {% for field, errors in form.errors.items() %}
-                    <strong>{{ form[field].label }}</strong>
-                    <ul>
-                        {% for error in errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endfor %}
-                </div>
-        {% endif %}
+            {% include "form_errors.html" %}
         <!-- 오류표시 End -->
 
         {# Form에서 작성한 라벨 #}

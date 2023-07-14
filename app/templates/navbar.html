@@ -10,7 +10,8 @@
                 <!-- <li class="nav-item"><a class="nav-link" href="/question/list">QnA</a></li> -->
                 <li class="nav-item"><a class="nav-link" href=" {{ url_for('question._list') }} ">QnA</a></li>
                 <li class="nav-item"><a class="btn btn-light" href="#" role="button">Login</a></li>
-                <li class="nav-item"><a class="btn btn-light" href="#" role="button">SignUp</a></li>
+                <li class="nav-item"><a class="btn btn-light" href="#" role="button">Logout</a></li>
+                <li class="nav-item"><a class="btn btn-light" href="{{ url_for('auth.signup')}}" role="button">SignUp</a></li>
             </ul>
 
         </div>

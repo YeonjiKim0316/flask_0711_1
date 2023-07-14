@@ -42,21 +42,3 @@
     T - signup.html 
     V - /signup/
 
-
-- 회원 관리
-    M - 회원에 관한 Model -> Table
-    T - id 비밀번호 확인하는
-        login.html
-    V - /login/
-    		auth_views.py 만들어서 __init__에 등록합니다. 'auth' 
-
-
-    @login required 
-    {% if logout % }
-        로그아웃 
-        - signup, Login 버튼 둘다보인다
-    {% else %}
-        인증 확인 
-    로그인한 화면 
-        - if 인증된 사람에게만 보여주는 로그아웃 버튼 
-    {% endif %}
