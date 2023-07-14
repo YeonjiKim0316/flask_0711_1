@@ -28,7 +28,7 @@ def _list():
 
 
 @question.route('/create/', methods=('GET', 'POST'))
-@login_required # 실습 - answer_views에도 적용
+@login_required # 접근 권한을 확인하기 위한 데코러이터 
 def create():
     form = QuestionForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -42,6 +42,7 @@ def create():
 @question.route('/modify/<int:question_id>', methods=('GET', 'POST'))
 @login_required
 def modify(question_id):
+    # 원본 글을 미리 가져옵니다 
     question = Question.query.get_or_404(question_id)
     if g.user != question.user:
         flash('수정권한이 없습니다')
@@ -50,7 +51,6 @@ def modify(question_id):
         form = QuestionForm()
         if form.validate_on_submit():
             form.populate_obj(question)
-            question.modify_date = datetime.now()  # 수정일시 저장
             db.session.commit()
             return redirect(url_for('question.detail', question_id=question_id))
     else:  # GET 요청

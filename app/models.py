@@ -21,6 +21,10 @@ class Answer(db.Model):
             # 2) Answer는 남겨놓는다 
                 # Question의 id를 남겨놓는다
                 # Question의 id를 삭제한다
+    # 비어있는 댓글 user_id에 1번 회원의 정보를 채워넣음
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=True, server_default="1")
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)   
+    user = db.relationship('User', backref=db.backref('answer_set'))
 
 class User(db.Model):
     id =db.Column(db.Integer, primary_key=True)

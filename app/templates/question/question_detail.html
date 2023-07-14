@@ -1,55 +1,104 @@
-{## 
 {% extends 'base.html' %}
 
 {% block content %}
-    question 이라는 객체에 값이 있다면
-    {% if question %}
-    글번호: {{ question.id }}
-    글제목: {{ question.subject }}
-    글내용: {{ question.content }}
-    글작성일: {{ question.create_date }}
-    {% endif %}
-
-    endif 바깥의 문장입니다.
-{% endblock %}
-##}
 
 <div class="container my-3">
+
+    <!-- flash 오류 -->
+    <!-- 물론 수정은 로그인 한 사용자와 글 작성자가 동일한 경우에만 가능하기 때문에 이 오류가 표시될 일은 없을 것이다. 하지만 비 정상적인 방법으로 질문을 수정할 경우 오류를 보여주어야 하므로 필요한 부분이다. -->
+    <!-- {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %} -->
+
     <!-- 질문 -->
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
             <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2">
-                    {{ question.create_date | date_time2}}
-                </div>
+      
+         
+            <!-- 글쓴이 추가. 답변 목록에도 추가 -->
+            <div class="badge bg-light text-dark p-2 text-start">
+                <div class="mb-2">{{ question.user.username }}</div>
+                <div>{{ question.create_date|date_time }}</div>
+            </div>
+        </div>
+
+        <!-- 수정 버튼 추가 -->
+        <div class="my-3">
+            {# 로그인한 사용자와 글쓴이가 같은 경우에만 보여야 하므로 {% if g.user == question.user %}를 사용했다. #}
+            {% if g.user == question.user %}
+            <a href="{{ url_for('question.modify', question_id=question.id) }}"
+                class="btn btn-sm btn-outline-secondary">수정</a>
+
+            <!-- 삭제버튼에 자바스크립트 심기 -->
+            <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+            data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</a>
+            {% endif %}
+               
+               <!-- 수정버튼 변경 완료 - 이후 question_views.py 수정 -->
             </div>
         </div>
     </div>
-    
-    <!-- 답변에 관한 코드 -->
-    <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">
-        {{ form.csrf_token }}
-        <div class="mb-3">
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
-        </div>
-        <input type="submit" value="답변완료" class="btn btn-primary"> 
-    </form>
-   
 
+    <!-- 답변 목록 -->
     <h5 class="border-bottom my-3 py-2">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
-    {% for answer in question.answer_set %}   
+    {% for answer in question.answer_set %}
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
-            <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2">
-                    {{ answer.create_date | date_time2 }}
-                </div>
+            
+
+
+                <!-- 글쓴이 추가 -->
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">{{ answer.user.username }}</div>
+                    <div>{{ answer.create_date|date_time }}</div>
+            </div>
+
+            <!-- 수정 버튼 추가 -->
+            <div class="my-3">
+                {% if g.user == answer.user %}
+                <a href="{{ url_for('answer.modify', answer_id=answer.id) }}"
+                class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="#" class="delete btn btn-sm btn-outline-secondary"
+                data-uri="{{ url_for('answer.delete', answer_id=answer.id) }}">삭제</a>
+                {% endif %}
             </div>
         </div>
     </div>
     {% endfor %}
 
+    <!-- 답변 등록 -->
+    <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">
+        <!-- 질문 상세 템플릿에 폼이 추가되었으므로 question_views.py 파일의 detail 함수도 폼을 사용하도록 수정해야 한다. 이 과정이 없으면 템플릿에서 form 객체를 읽지 못해 오류가 난다. -->
+        {{ form.csrf_token }}
+        
+        {% include "form_errors.html" %}
+      
+        <div class="mb-3">
+            <!-- <textarea name="content" id="content" class="form-control" rows="10"></textarea> -->
+
+            <!-- 로그아웃 상태에서 답변 등록 불가능하게 만들기 -->
+            <textarea {% if not g.user %}disabled{% endif %} name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="답변등록" class="btn btn-primary"> 
+    </form>
 </div>
+{% endblock %}
+<!-- 자바스크립트 추가. 이후 question_views.py에 view 추가 -->
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+{% endblock %}

@@ -84,6 +84,7 @@ def logout():
     return redirect(url_for('basic.index'))
 
 
+# 우리가 사용하기 위한 어노테이션을 만든 겁니다
 # @login_required 라는 함수를 수행하면 
 def login_required(view):
     @functools.wraps(view)
