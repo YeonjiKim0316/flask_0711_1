@@ -66,19 +66,21 @@ def login():
     return render_template('auth/login.html', form=form)
 
 
-# @auth.before_app_request
-# def load_logged_in_user():
-#     user_id = session.get('user_id')
-#     if user_id is None:
-#         g.user = None
-#     else:
-#         g.user = User.query.get(user_id)
+@auth.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        # 없으면 로그아웃 상태라는 것을 파악한다
+        g.user = None
+    else:
+        # @auth 를 통해서 라우팅을 하면 로그인이 되어있으면 로그인 사람의 모든 회원정보를 테이블에 가져오고
+        g.user = User.query.get(user_id) 
 
 
-# @auth.route('/logout/')
-# def logout():
-#     session.clear()
-#     return redirect(url_for('basic.index'))
+@auth.route('/logout/')
+def logout():
+    session.clear()
+    return redirect(url_for('basic.index'))
 
 
 # def login_required(view):
