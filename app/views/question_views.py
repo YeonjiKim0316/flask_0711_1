@@ -58,7 +58,7 @@ def modify(question_id):
     return render_template('question/question_form.html', form=form)
 
 @question.route('/delete/<int:question_id>')
-@login_required
+@login_required # 로그인이 안 되어 있으면 auth.login 으로 GET 방식으로 이동
 def delete(question_id):
     question = Question.query.get_or_404(question_id)
     if g.user != question.user:
