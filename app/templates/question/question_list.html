@@ -5,7 +5,9 @@
 {#  render_template 함수에서 전달받은 질문 목록 데이터 question_list가 있는지 검사 #}
 
 <div class="container my-3">
+    {% if g.user %}
     <a href="{{ url_for ('question.create') }}" class="btn btn-dark">질문 등록</a>
+    {% endif %}
     <p>
 
     <table class="table">
