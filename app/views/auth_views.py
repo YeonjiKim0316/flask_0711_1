@@ -5,7 +5,7 @@ from werkzeug.utils import redirect
 from app.models import User
 from app import db
 from app.forms import UserCreateForm, UserLoginForm
-
+import functools
 
             # 우리가 부를 이름, flask 프레임워크가 찾을 이름, 라우팅주소    
 auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -66,6 +66,7 @@ def login():
     return render_template('auth/login.html', form=form)
 
 
+# auth로 시작하는 블루프린트가 주소창에 가기 전에 무조건 실행되는 애너테이션
 @auth.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -83,11 +84,12 @@ def logout():
     return redirect(url_for('basic.index'))
 
 
-# def login_required(view):
-#     @functools.wraps(view)
-#     def wrapped_view(*args, **kwargs):
-#         if g.user is None:
-#             _next = request.url if request.method == 'GET' else ''
-#             return redirect(url_for('auth.login', next=_next))
-#         return view(*args, **kwargs)
-#     return wrapped_view
+# @login_required 라는 함수를 수행하면 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if g.user is None:
+            _next = request.url if request.method == 'GET' else ''
+            return redirect(url_for('auth.login', next=_next))
+        return view(*args, **kwargs)
+    return wrapped_view
