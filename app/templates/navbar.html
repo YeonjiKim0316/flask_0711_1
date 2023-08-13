@@ -10,11 +10,12 @@
                 <!-- <li class="nav-item"><a class="nav-link" href="/question/list">QnA</a></li> -->
                 <li class="nav-item"><a class="nav-link" href=" {{ url_for('question._list') }} ">QnA</a></li>
                 {% if g.user %}
+                <li class="nav-item"><a class="nav-link" href="CLASSIFIER 경로">Classifier</a></li>
                 <li class="nav-item"><a class="btn btn-light" href="{{ url_for('auth.logout')}}" role="button">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a class="btn btn-light" href="{{ url_for('auth.login')}}" role="button">Login</a></li>
-                {% endif %}
                 <li class="nav-item"><a class="btn btn-light" href="{{ url_for('auth.signup')}}" role="button">SignUp</a></li>
+                {% endif %}
             </ul>
 
         </div>

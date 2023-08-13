@@ -17,8 +17,10 @@
 # 임시저장소의 캐시를 삭제하면 됩니다
 # git rm -r --cached .
 
+
 # 가상환경
 myvenv/
+my_venv/
 myvenv.cmd
 
 # 캐시파일
@@ -31,3 +33,7 @@ migrations/
 # 비밀번호 관련 설정
 # 개발용, 배포용 파일을 만들어서 
 config.py
+.env 
+
+# 로그
+*/logs/*

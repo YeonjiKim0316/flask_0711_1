@@ -29,5 +29,11 @@ class Answer(db.Model):
 class User(db.Model):
     id =db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    # password = db.Column(db.String(50), nullable=False)
+    # email = db.Column(db.String(100), unique=True, nullable=False)
+
+    
+    # mysql에서 hash 알고리즘 적용한 비밀번호 들어가도록 DB Upgrade
+    password = db.Column(db.String(300), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
+
