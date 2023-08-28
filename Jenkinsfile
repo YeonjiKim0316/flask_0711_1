@@ -1,9 +1,7 @@
 pipeline {
-  stages {
-  withCredentials([[$class: 'UsernamePasswordMultiBinding',
-     credentialsId: 'docker-hub',
-     usernameVariable: 'DOCKER_USER_ID', 
-     passwordVariable: 'DOCKER_USER_PASSWORD']]) { 
+  agent any
+   
+  stages { 
      stage('Pull') {
          steps {
             git branch: 'main', url: 'https://github.com/YeonjiKim0316/flask_0711_1'
@@ -29,6 +27,10 @@ pipeline {
       }
 
       stage('Tag') {
+         withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                   credentialsId: 'docker-hub',
+                   usernameVariable: 'DOCKER_USER_ID', 
+                   passwordVariable: 'DOCKER_USER_PASSWORD']]) 
 
             sh(script: '''docker tag ${DOCKER_USER_ID}/flask_app2 \
 
