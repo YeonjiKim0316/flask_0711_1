@@ -3,8 +3,7 @@ node {
     withCredentials([[$class: 'UsernamePasswordMultiBinding', 
         credentialsId: 'docker-hub', 
         usernameVariable: 'DOCKER_USER_ID', 
-        passwordVariable: 'DOCKER_USER_PASSWORD']]) 
-        { 
+        passwordVariable: 'DOCKER_USER_PASSWORD']])  
      stage('Pull') {
          steps {
             git branch: 'main', url: 'https://github.com/YeonjiKim0316/flask_0711_1'
@@ -58,5 +57,5 @@ node {
               sh "sudo docker rmi ${DOCKER_USER_ID}/flask_app2:latest" // sudo docker image 제거
       } 
     }
-  }
+
 
