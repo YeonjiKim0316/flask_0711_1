@@ -1,6 +1,6 @@
 node {
 
-  git poll: true, url:'https://github.com/YeonjiKim0316/flask_0711_1'
+  git poll: true
   withCredentials([[$class: 'UsernamePasswordMultiBinding',
      credentialsId: 'docker-hub',
      usernameVariable: 'DOCKER_USER_ID', 
