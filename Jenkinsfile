@@ -35,11 +35,10 @@ node {
             sh(script: 'docker push ${DOCKER_USER_ID}/flask_app2:latest')
 
       }
-			stage('Deploy') {
-	        	steps {
+	stage('Deploy') {
+	      	steps {
             	sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
-        			sh '''
-        				ssh -o StrictHostKeyChecking=no ubuntu@3.34.183.240
+        	sh '''ssh -o StrictHostKeyChecking=no ubuntu@3.34.183.240
                         scp -r /var/lib/jenkins/workspace/flask-app-from-dockerhub ubuntu@3.34.183.240:/home/ubuntu
                         ssh ubuntu@3.34.183.240 'sudo docker run --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t  ${DOCKER_USER_ID}/flask_app2:latest') 
                     '''
@@ -47,5 +46,4 @@ node {
         	}
         }
   }
-
 }
