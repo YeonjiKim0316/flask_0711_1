@@ -21,30 +21,32 @@ pipeline {
       }
 
       stage('Build') {
-
+         steps {
             sh(script: 'docker build -t flask_app2 .')
-
+         }
       }
 
       stage('Tag') {
-         withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                   credentialsId: 'docker-hub',
-                   usernameVariable: 'DOCKER_USER_ID', 
-                   passwordVariable: 'DOCKER_USER_PASSWORD']]) 
-
-            sh(script: '''docker tag ${DOCKER_USER_ID}/flask_app2 \
-
-            ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
+         steps {
+           withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                     credentialsId: 'docker-hub',
+                     usernameVariable: 'DOCKER_USER_ID', 
+                     passwordVariable: 'DOCKER_USER_PASSWORD']]) 
+  
+              sh(script: '''docker tag ${DOCKER_USER_ID}/flask_app2 \
+  
+              ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
             }
+      }
 
       stage('Push') {
-
+         steps {
             sh(script: 'docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
 
             sh(script: 'docker push ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}') 
 
             sh(script: 'docker push ${DOCKER_USER_ID}/flask_app2:latest')
-
+         }
       }
       
       stage('Deploy') {
