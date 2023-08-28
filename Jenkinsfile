@@ -1,6 +1,5 @@
-node {
-
-  git poll: true
+pipeline {
+  stages {
   withCredentials([[$class: 'UsernamePasswordMultiBinding',
      credentialsId: 'docker-hub',
      usernameVariable: 'DOCKER_USER_ID', 
@@ -63,6 +62,6 @@ node {
               sh "docker rmi ${DOCKER_USER_ID}/flask_app2:latest" // docker image 제거
           }
       } 
+    }
   }
-
 }
