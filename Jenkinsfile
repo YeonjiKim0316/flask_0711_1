@@ -5,7 +5,6 @@ node {
      credentialsId: 'docker-hub',
      usernameVariable: 'DOCKER_USER_ID', 
      passwordVariable: 'DOCKER_USER_PASSWORD']]) { 
-     stages {	  
 	     stage('Pull') {
 	            git 'https://github.com/YeonjiKim0316/flask_0711_1' 
 	
@@ -46,6 +45,5 @@ node {
 	        		}
 	        	}
 	        }
-     }
   }
 }
