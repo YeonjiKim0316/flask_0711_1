@@ -37,7 +37,7 @@ node {
       }
 			stage('Deploy') {
 	        	steps {
-            	sshagent(credentials: ['aws_key_2']) {
+            	sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
         			sh '''
         				ssh -o StrictHostKeyChecking=no ubuntu@3.34.183.240
                         scp -r /var/lib/jenkins/workspace/flask-app-from-dockerhub ubuntu@3.34.183.240:/home/ubuntu
@@ -46,6 +46,6 @@ node {
         		}
         	}
         }
-      
+  }
 
 }
