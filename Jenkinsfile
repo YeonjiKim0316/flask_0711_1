@@ -24,7 +24,7 @@ node {
 
             sh(script: '''docker tag ${DOCKER_USER_ID}/flask_app2 \
 
-            ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') }
+            ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}''') }
 
       stage('Push') {
 
