@@ -17,18 +17,18 @@ pipeline {
 
       stage('Build') {
          steps {
-            sh(script: 'docker build -t flask_app2 .')
+            sh(script: 'sudo docker build -t flask_app2 .')
          }
       }
 
       stage('Tag') {
          steps {
            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                     credentialsId: 'docker-hub',
+                     credentialsId: 'sudo docker-hub',
                      usernameVariable: 'DOCKER_USER_ID', 
                      passwordVariable: 'DOCKER_USER_PASSWORD']]) 
   
-              sh(script: '''docker tag ${DOCKER_USER_ID}/flask_app2 \
+              sh(script: '''sudo docker tag ${DOCKER_USER_ID}/flask_app2 \
   
               ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
             }
@@ -37,15 +37,15 @@ pipeline {
       stage('Push') {
          steps {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                     credentialsId: 'docker-hub',
+                     credentialsId: 'sudo docker-hub',
                      usernameVariable: 'DOCKER_USER_ID', 
                      passwordVariable: 'DOCKER_USER_PASSWORD']]) 
            
-            sh(script: 'docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
+            sh(script: 'sudo docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
 
-            sh(script: 'docker push ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}') 
+            sh(script: 'sudo docker push ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}') 
 
-            sh(script: 'docker push ${DOCKER_USER_ID}/flask_app2:latest')
+            sh(script: 'sudo docker push ${DOCKER_USER_ID}/flask_app2:latest')
          }
       }
       
@@ -54,8 +54,8 @@ pipeline {
             sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
                 sh '''
                     ssh -o StrictHostKeyChecking=no ubuntu@3.34.183.240
-                    scp -r /var/lib/jenkins/workspace/flask-app-from-dockerhub ubuntu@3.34.183.240:/home/ubuntu
-                    ssh ubuntu@3.34.183.240 'sudo docker run --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t  ${DOCKER_USER_ID}/flask_app2:latest') 
+                    scp -r /var/lib/jenkins/workspace/flask-app-from-sudo dockerhub ubuntu@3.34.183.240:/home/ubuntu
+                    ssh ubuntu@3.34.183.240 'sudo sudo docker run --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t  ${DOCKER_USER_ID}/flask_app2:latest') 
                 '''
             }
         }
@@ -63,7 +63,7 @@ pipeline {
 
     stage('Cleaning up') { 
           steps { 
-              sh "docker rmi ${DOCKER_USER_ID}/flask_app2:latest" // docker image 제거
+              sh "sudo docker rmi ${DOCKER_USER_ID}/flask_app2:latest" // sudo docker image 제거
           }
       } 
     }
