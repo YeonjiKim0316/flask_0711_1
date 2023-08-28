@@ -1,12 +1,12 @@
 node {
 
-  git poll: true, url:'https://github.com/YeonjiKim0316/flask_0711_1.git'
+  git poll: true, url:'https://github.com/YeonjiKim0316/flask_0711_1'
   withCredentials([[$class: 'UsernamePasswordMultiBinding',
      credentialsId: 'docker-hub',
      usernameVariable: 'DOCKER_USER_ID', 
      passwordVariable: 'DOCKER_USER_PASSWORD']]) { 
      stage('Pull') {
-            git 'https://github.com/YeonjiKim0316/flask_0711_1.git' 
+            git 'https://github.com/YeonjiKim0316/flask_0711_1' 
 
      }
 
