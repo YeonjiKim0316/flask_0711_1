@@ -3,26 +3,16 @@ node {
     withCredentials([[$class: 'UsernamePasswordMultiBinding', 
         credentialsId: 'docker-hub', 
         usernameVariable: 'DOCKER_USER_ID', 
-        passwordVariable: 'DOCKER_USER_PASSWORD']])  
+        passwordVariable: 'DOCKER_USER_PASSWORD']]) 
+    { 
      stage('Pull') {
-         steps {
             git branch: 'main', url: 'https://github.com/YeonjiKim0316/flask_0711_1'
         }
-        post {
-            failure {
-              echo 'Repository clone failure !'
-            }
-            success {
-              echo 'Repository clone success !'
-            }
-        }
-    }
+        
 
       stage('Build') {
-         steps {
             sh(script: 'sudo docker build -t flask_app2 .')
-         }
-      }
+        }
 
       stage('Tag') {
               sh(script: '''sudo docker tag ${DOCKER_USER_ID}/flask_app2 \
@@ -41,7 +31,7 @@ node {
             sh(script: 'sudo docker push ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}') 
 
             sh(script: 'sudo docker push ${DOCKER_USER_ID}/flask_app2:latest')
-      }
+        }
       
       stage('Deploy') {
             sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
@@ -57,5 +47,4 @@ node {
               sh "sudo docker rmi ${DOCKER_USER_ID}/flask_app2:latest" // sudo docker image 제거
       } 
     }
-
-
+  }
