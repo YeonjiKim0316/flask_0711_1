@@ -1,7 +1,8 @@
 pipeline {
-  agent any
-   
-  stages { 
+  agent {
+     docker { image 'node:18.17.1-alpine3.18' }
+    }
+    stages { 
      stage('Pull') {
          steps {
             git branch: 'main', url: 'https://github.com/YeonjiKim0316/flask_0711_1'
