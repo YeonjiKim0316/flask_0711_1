@@ -22,11 +22,11 @@ pipeline {
       }
 
       stage('Tag') {
-         steps {
-           withCredentials([[$class: 'UsernamePasswordMultiBinding',
+         withCredentials([[$class: 'UsernamePasswordMultiBinding',
                      credentialsId: 'sudo docker-hub',
                      usernameVariable: 'DOCKER_USER_ID', 
                      passwordVariable: 'DOCKER_USER_PASSWORD']]) 
+         steps {         
   
               sh(script: '''sudo docker tag ${DOCKER_USER_ID}/flask_app2 \
   
