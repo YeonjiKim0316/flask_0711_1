@@ -14,16 +14,10 @@ node {
         }
 
       stage('Tag') {
-              sh(script: '''sudo docker tag ${DOCKER_USER_ID}/flask_app2 \
-  
-              ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
+              sh(script: '''sudo docker tag ${DOCKER_USER_ID}/flask_app2 ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
             }
 
       stage('Push') {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                     credentialsId: 'sudo docker-hub',
-                     usernameVariable: 'DOCKER_USER_ID', 
-                     passwordVariable: 'DOCKER_USER_PASSWORD']]) 
            
             sh(script: 'sudo docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
 
