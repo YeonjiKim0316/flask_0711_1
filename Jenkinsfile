@@ -34,7 +34,7 @@ node {
     }
 
     stage('Cleaning up') { 
-              sh "sudo docker rmi ${DOCKER_USER_ID}/flask_app2" // sudo docker image 제거
+              sh "sudo docker rmi ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}" // sudo docker image 제거
       } 
     }
   }
