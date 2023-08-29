@@ -14,7 +14,7 @@ node {
         }
 
       stage('Tag') {
-              sh(script: '''sudo docker tag flask_app2 ${DOCKER_USER_ID}/flask:${BUILD_NUMBER}''') 
+              sh(script: '''sudo docker tag flask_app2 ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}''') 
             }
 
       stage('Push') {
