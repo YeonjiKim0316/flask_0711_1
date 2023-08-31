@@ -19,7 +19,6 @@ ENV STATIC_INDEX 0
 COPY . /app
 COPY config.py config.py
 COPY main.py main.py
-# COPY uwsgi.ini uwsgi.ini
 WORKDIR /app
 
 # # Make /app/* available to be imported by Python globally to better support several use cases like Alembic migrations.
