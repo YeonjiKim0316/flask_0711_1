@@ -27,8 +27,8 @@ node {
       stage('Deploy') {
             sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@3.34.183.240
-                    ssh ubuntu@3.34.183.240 "sudo docker run --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t \$DOCKER_USER_ID/flask_app2:\$BUILD_NUMBER"
+                    ssh -o StrictHostKeyChecking=no ubuntu@13.125.156.5
+                    ssh ubuntu@13.125.156.5 "sudo docker run --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t \$DOCKER_USER_ID/flask_app2:\$BUILD_NUMBER"
                 '''
         }
     }
