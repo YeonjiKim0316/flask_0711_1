@@ -26,7 +26,7 @@ node {
       stage('Deploy') {
             sshagent(credentials: ['yeonji-jenkins-ec2-key']) {
                 sh(script: 'ssh -o StrictHostKeyChecking=no ubuntu@54.180.89.134')
-                sh(script: 'if [ "$(sudo docker ps -q | wc -l)" -gt 1 ]; then "sudo docker rm -f $(sudo docker ps -aq)" else fi')
+                sh(script: 'if [ "$(sudo docker ps -q | wc -l)" -gt 1 ]; then "sudo docker rm -f $(sudo docker ps -aq)"; fi')
                 sh(script: 'ssh ubuntu@54.180.89.134 "sudo docker run --name docker_flask --env-file .env -e TZ=Asia/Seoul -p 80:80 -d -t \${DOCKER_USER_ID}/flask_app2:\${BUILD_NUMBER}"')
         }
     }
