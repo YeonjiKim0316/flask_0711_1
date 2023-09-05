@@ -20,7 +20,7 @@ node {
       stage('Push') {
            
             sh(script: 'sudo docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}') 
-
+                sh(script: 'ssh ubuntu@54.180.89.134 "sudo docker rm -f \$(sudo docker ps -aq)"')
             sh(script: 'sudo docker push ${DOCKER_USER_ID}/flask_app2:${BUILD_NUMBER}') 
         }
       
